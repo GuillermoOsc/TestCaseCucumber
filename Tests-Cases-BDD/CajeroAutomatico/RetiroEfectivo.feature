@@ -1,6 +1,3 @@
-# Se describen dos escenarios de prueba diferentes para la funcionalidad de retiro de efectivo en un
-# cajero automático, uno para un retiro exitoso y otro para un retiro fallido.
-
 Feature: Retiro de efectivo
 
     Scenario Outline: Retiro exitoso
@@ -10,6 +7,47 @@ Feature: Retiro de efectivo
         And selecciono la cantidad de efectivo que deseo retirar
         And confirmo mi selección
         Then debería ver una pantalla que muestre la cantidad de efectivo retirada y mi saldo actualizado
+
+
+    # Se utiliza una tabla de datos para proporcionar información específica sobre el monto a retirar y el tipo
+    # de cuenta. En la sección "Cuando ingreso el monto a retirar y el tipo de cuenta en la tabla:", se utiliza
+    # una tabla de datos para proporcionar los datos que se ingresarán en la pantalla de retiro de efectivo.
+
+    Scenario Outline: Scenario Outline name: Realizar un retiro de efectivo con un cajero automático
+        Given estoy en la pantalla de inicio del cajero automático
+        When ingreso mi número de cuenta "123456" y mi PIN "6789"
+        Then se me presentan las opciones de "Consultar saldo", "Retirar efectivo" y "Cancelar"
+        When elijo "Retirar efectivo"
+        Then se me presenta una tabla con las opciones de "Monto a retirar" y "Tipo de cuenta"
+        When ingreso el monto a retirar y el tipo de cuenta en la tabla:
+            | Monto a retirar | Tipo de cuenta |
+            | 50              | Corriente      |
+        And presiono el botón "Continuar"
+        Then se muestra una pantalla de confirmación con el mensaje "¿Desea confirmar la transacción?"
+        When confirmo la transacción
+        Then se dispensa el efectivo solicitado y se muestra un recibo con los detalles de la transacción
+
+
+
+
+    # Se utiliza una tabla de datos para mostrar los detalles del saldo de la cuenta,
+    # que incluyen el tipo de cuenta y el saldo actual en la cuenta.
+
+    Scenario Outline: Scenario Outline name: Verificar el saldo de una cuenta
+        Given estoy en la pantalla de inicio del cajero automático
+        When ingreso mi número de cuenta "123456" y mi PIN "6789"
+        Then se me presentan las opciones de "Consultar saldo", "Retirar efectivo" y "Cancelar"
+        When elijo "Consultar saldo"
+        Then se me muestra el saldo actual de mi cuenta "123456" en la pantalla:
+            | Tipo de cuenta | Saldo       |
+            | Corriente      | $100.00 USD |
+            | Ahorros        | $500.00 USD |
+
+
+
+
+    # Se valida si el cajero automático puede detectar y manejar adecuadamente
+    # cuando un usuario ingresa un PIN incorrecto
 
     Scenario Outline: Retiro fallido
         Given estoy en la pantalla principal del cajero automático
