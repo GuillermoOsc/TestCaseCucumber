@@ -29,23 +29,6 @@ Feature: Retiro de efectivo
 
 
 
-
-    # Se utiliza una tabla de datos para mostrar los detalles del saldo de la cuenta,
-    # que incluyen el tipo de cuenta y el saldo actual en la cuenta.
-
-    Scenario Outline: Scenario Outline name: Verificar el saldo de una cuenta
-        Given estoy en la pantalla de inicio del cajero automático
-        When ingreso mi número de cuenta "123456" y mi PIN "6789"
-        Then se me presentan las opciones de "Consultar saldo", "Retirar efectivo" y "Cancelar"
-        When elijo "Consultar saldo"
-        Then se me muestra el saldo actual de mi cuenta "123456" en la pantalla:
-            | Tipo de cuenta | Saldo       |
-            | Corriente      | $100.00 USD |
-            | Ahorros        | $500.00 USD |
-
-
-
-
     # Se valida si el cajero automático puede detectar y manejar adecuadamente
     # cuando un usuario ingresa un PIN incorrecto
 
@@ -61,7 +44,7 @@ Feature: Retiro de efectivo
     # Se valida si el cajero automático puede detectar y manejar adecuadamente cuando un usuario
     # trata de retirar una cantidad de efectivo que excede su límite diario de retiro
 
-    Scenario Outline: : Retiro fallido por límite diario excedido
+    Scenario Outline: Retiro fallido por límite diario excedido
         Given estoy en la pantalla principal del cajero automático
         When ingreso mi número de tarjeta y mi PIN
         And selecciono la opción "Retiro de efectivo"
@@ -72,7 +55,7 @@ Feature: Retiro de efectivo
     # Se valida si el cajero automático puede detectar y manejar adecuadamente
     # cuando un usuario intenta retirar efectivo con una tarjeta vencida.
 
-    Scenario Outline: : Retiro fallido por tarjeta vencida
+    Scenario Outline: Retiro fallido por tarjeta vencida
         Given estoy en la pantalla principal del cajero automático
         When ingreso mi número de tarjeta y mi PIN
         And selecciono la opción "Retiro de efectivo"
@@ -85,7 +68,7 @@ Feature: Retiro de efectivo
     # Se valida si el cajero automático puede detectar y manejar adecuadamente cuando un usuario
     # intenta retirar efectivo con una tarjeta que ha sido bloqueada por el banco.
 
-    Scenario Outline: : Retiro fallido por tarjeta bloqueada
+    Scenario Outline: Retiro fallido por tarjeta bloqueada
         Given estoy en la pantalla principal del cajero automático
         When ingreso mi número de tarjeta y mi PIN
         And selecciono la opción "Retiro de efectivo"
