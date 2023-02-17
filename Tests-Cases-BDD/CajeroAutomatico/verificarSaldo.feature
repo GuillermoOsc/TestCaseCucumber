@@ -1,5 +1,11 @@
-    # Se utiliza una tabla de datos para mostrar los detalles del saldo de la cuenta,
-    # que incluyen el tipo de cuenta y el saldo actual en la cuenta.
+# Se utiliza una tabla de datos para mostrar los detalles del saldo de la cuenta,
+# que incluyen el tipo de cuenta y el saldo actual en la cuenta.
+
+Feature: Verificación de saldo de las cuentas.
+
+    Cómo usuario/cliente
+    Quiero consultar el saldo de mi cuenta bancaria
+    Para saber la cantidad de saldo disponible
 
     Scenario Outline: Verificar el saldo de una cuenta
         Given estoy en la pantalla de inicio del cajero automático
